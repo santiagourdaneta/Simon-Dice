@@ -1,0 +1,15 @@
+# Archivos generados por TypeScript
+*.js
+*.js.map
+
+# Directorios de entornos de desarrollo
+.vscode/
+.idea/
+
+# Directorios de Node.js
+node_modules/
+npm-debug.log
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db

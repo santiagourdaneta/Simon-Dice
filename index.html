@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simon Dice</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.classless.min.css">
+    
+    <style>
+        :root {
+            --green-color: #4CAF50;
+            --red-color: #F44336;
+            --yellow-color: #FFEB3B;
+            --blue-color: #2196F3;
+        }
+        body {
+            background-color: var(--pico-background-color);
+            color: var(--pico-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+            font-family: sans-serif;
+        }
+        main {
+            /* Eliminamos el padding para que el contenido se estire más */
+            padding: 0 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        }
+        h1 {
+            color: var(--pico-color);
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .game-board {
+            /* Quitamos el ancho fijo para que el contenedor se adapte a su contenido */
+            display: flex;
+            flex-wrap: nowrap;
+            align-items: center;
+            gap: 1.5rem;
+            /* Ajustamos el margen para que los bordes del tablero coincidan con el botón */
+            margin: 2rem 0;
+            
+            /* Efecto de sombra al tablero completo */
+            padding: 1rem;
+            border-radius: 1rem;
+            box-shadow: 0 0 25px 5px rgba(0, 0, 0, 0.5);
+        }
+        .color-button {
+            /* Permite que los botones se expandan para ocupar el espacio */
+            flex-grow: 1;
+            aspect-ratio: 1 / 1; /* Mantiene la forma de círculo */
+            border-radius: 50%;
+            cursor: pointer;
+            border: 4px solid var(--pico-color);
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+            opacity: 0.5;
+            pointer-events: none;
+        }
+        .color-button.active {
+            transform: scale(0.98);
+            filter: brightness(1.2);
+            box-shadow: 0 0 20px var(--pico-color);
+        }
+        .color-button.playing {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        #green { background-color: var(--green-color); }
+        #red { background-color: var(--red-color); }
+        #yellow { background-color: var(--yellow-color); }
+        #blue { background-color: var(--blue-color); }
+
+        .color-button.incorrecto {
+        animation: incorrecto-animacion 0.3s ease-in-out;
+        box-shadow: 0 0 20px 5px red; /* Un brillo rojo para indicar error */
+    }
+
+    /* Animación para el efecto de acierto */
+    @keyframes correcto-animacion {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+        100% { transform: scale(1); }
+    }
+
+    /* Animación para el efecto de error */
+    @keyframes incorrecto-animacion {
+        0% { transform: translateX(0); }
+        25% { transform: translateX(-5px); }
+        50% { transform: translateX(5px); }
+        75% { transform: translateX(-5px); }
+        100% { transform: translateX(0); }
+    }
+    </style>
+
+</head>
+<body>
+    <main class="container">
+        <h1>Simon Dice</h1>
+        <p id="message">Presiona "Empezar" para jugar</p>
+        <p>Puntuación: <span id="score">0</span></p>
+        <p>Mejor Puntuación: <span id="high-score">0</span></p>
+
+        <div class="game-board">
+            <button id="green" class="color-button"></button>
+            <button id="red" class="color-button"></button>
+            <button id="yellow" class="color-button"></button>
+            <button id="blue" class="color-button"></button>
+        </div>
+        
+        <button id="start-button">Empezar</button>
+    </main>
+    
+    <script src="juego.js"></script>
+</body>
+</html>
